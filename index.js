@@ -1,69 +1,82 @@
-const express = require("express")
-const fs = require("fs")
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.use(express.json());
+
 app.use((req, res, next) => {
-    console.log(req.path);
-    next()
-})
+  console.log("Path:", req.path);
+  next();
+});
 
-app.get('/users', (req, res) => {
-    const { name } = req.query
-    console.log({name})
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
-    
-    const data = fs.readFileSync('users.json').toString()
-    const json = JSON.parse(data)
-    
-    const filteredData = [];
+app.get("/users", (req, res) => {
+  const filters = req.query;
 
-    for (let i = 0; i < json.length; i++) {
-        if (json[i].name === name) {
-            filteredData.push(json[i])
+  let data = [];
+
+  if (fs.existsSync("users.json")) {
+    const file = fs.readFileSync("users.json").toString();
+    data = JSON.parse(file);
+  }
+
+  const filtered = data.filter((user) => {
+    for (const key in filters) {
+      const userValue = user[key];
+      const filterValue = filters[key];
+
+      if (typeof userValue === "string" && typeof filterValue === "string") {
+        if (userValue.toLowerCase() !== filterValue.toLowerCase()) {
+          return false;
         }
+      } else {
+        if (userValue != filterValue) {
+          return false;
+        }
+      }
     }
+    return true;
+  });
 
-    console.log(filteredData)
-    
-    // if (name === 'John') {
-    //     res.send('John name is not accepted');
-    //     return;
-    // }
+  res.json(filtered);
+});
 
-    if (filteredData.length === 0) {
-        res.send(json)
-    }else{
+app.post("/users", (req, res) => {
+  const user = req.body;
 
-        res.send(filteredData)
-    }
+  if (!user || !user.name) {
+    return res.status(400).send("Invalid user data.");
+  }
 
-})
+  if (user.name === "John") {
+    return res.send("John name is not accepted");
+  }
 
-app.post('/users', (req, res, next) => {
-    const user = req.body;
+  let data = [];
 
-    if (user.name === 'John') {
-        res.send('John name is not accepted');
-        return;
-    }
-    
-    if (!fs.existsSync('users.json')) {
-        fs.writeFileSync('users.json', '['+JSON.stringify(req.body)+']')
-    }
+  if (fs.existsSync("users.json")) {
+    const file = fs.readFileSync("users.json").toString();
+    data = JSON.parse(file);
+  }
 
+  data.push(user);
+  fs.writeFileSync("users.json", JSON.stringify(data, null, 2));
 
-    const data = fs.readFileSync('users.json').toString()
-    const json = JSON.parse(data)
-    json.push(req.body)
+  res.send("User added.");
+});
 
-    fs.writeFileSync('users.json', JSON.stringify(json))
-
-    res.send('User added.')
-})
+app.use((req, res) => {
+  res.redirect("/");
+});
 
 app.listen(3000, () => {
-    console.log("app running at localhost:3000")
-})
-
+  console.log("App running at http://localhost:3000");
+});

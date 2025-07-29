@@ -1,1 +1,107 @@
-[{"name":"Owais","age":27},{"name":"Owais","age":28},{"name":"Anas","age":22},{"name":"Anas","age":22},{"name":"Anas","age":22}]
+[
+  {
+    "name": "Owais",
+    "age": 27,
+    "email": "owais27@gmail.com",
+    "gender": "male",
+    "city": "Karachi"
+  },
+  {
+    "name": "Anas",
+    "age": 23,
+    "email": "anas.dev@gmail.com",
+    "gender": "male",
+    "city": "Lahore"
+  },
+  {
+    "name": "Fatima",
+    "age": 24,
+    "email": "fatima24@hotmail.com",
+    "gender": "female",
+    "city": "Karachi"
+  },
+  {
+    "name": "Ali",
+    "age": 30,
+    "email": "ali_bhai@gmail.com",
+    "gender": "male",
+    "city": "Multan"
+  },
+  {
+    "name": "Sara",
+    "age": 26,
+    "email": "sara_rose@mail.com",
+    "gender": "female",
+    "city": "Lahore"
+  },
+  {
+    "name": "Usman",
+    "age": 29,
+    "email": "usman.dev@gmail.com",
+    "gender": "male",
+    "city": "Peshawar"
+  },
+  {
+    "name": "Zainab",
+    "age": 25,
+    "email": "zainab25@gmail.com",
+    "gender": "female",
+    "city": "Karachi"
+  },
+  {
+    "name": "Bilal",
+    "age": 31,
+    "email": "bilal_works@mail.com",
+    "gender": "male",
+    "city": "Hyderabad"
+  },
+  {
+    "name": "Hira",
+    "age": 27,
+    "email": "hira.codes@gmail.com",
+    "gender": "female",
+    "city": "Islamabad"
+  },
+  {
+    "name": "Noman",
+    "age": 32,
+    "email": "noman.dev@mail.com",
+    "gender": "male",
+    "city": "Sialkot"
+  },
+  {
+    "name": "Ayesha",
+    "age": 22,
+    "email": "ayesha_star@yahoo.com",
+    "gender": "female",
+    "city": "Rawalpindi"
+  },
+  {
+    "name": "Hamza",
+    "age": 28,
+    "email": "hamza28@gmail.com",
+    "gender": "male",
+    "city": "Faisalabad"
+  },
+  {
+    "name": "Laiba",
+    "age": 24,
+    "email": "laiba.designs@mail.com",
+    "gender": "female",
+    "city": "Quetta"
+  },
+  {
+    "name": "Taha",
+    "age": 26,
+    "email": "taha.tech@gmail.com",
+    "gender": "male",
+    "city": "Karachi"
+  },
+  {
+    "name": "Iqra",
+    "age": 25,
+    "email": "iqra25@gmail.com",
+    "gender": "female",
+    "city": "Larkana"
+  }
+]
