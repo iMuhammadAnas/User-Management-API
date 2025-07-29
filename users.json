@@ -103,5 +103,26 @@
     "email": "iqra25@gmail.com",
     "gender": "female",
     "city": "Larkana"
+  },
+  {
+    "name": "Ali",
+    "age": "12",
+    "email": "ali@gmail.com",
+    "gender": "male",
+    "city": "Karachi"
+  },
+  {
+    "name": "Sadan",
+    "age": "25",
+    "email": "sadan@gmail.com",
+    "gender": "male",
+    "city": "Swat"
+  },
+  {
+    "name": "Unzeela",
+    "age": "21",
+    "email": "unzeela@gmail.com",
+    "gender": "female",
+    "city": "Kashmir"
   }
 ]

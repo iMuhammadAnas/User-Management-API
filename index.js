@@ -8,6 +8,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   console.log("Path:", req.path);
@@ -49,14 +50,18 @@ app.get("/users", (req, res) => {
   res.json(filtered);
 });
 
+app.get("/add-user", (req, res) => {
+  res.render("add-user");
+});
+
 app.post("/users", (req, res) => {
   const user = req.body;
 
-  if (!user || !user.name) {
+  if (!user || !user.name || !user.email) {
     return res.status(400).send("Invalid user data.");
   }
 
-  if (user.name === "John") {
+  if (user.name.toLowerCase() === "john") {
     return res.send("John name is not accepted");
   }
 
@@ -67,10 +72,118 @@ app.post("/users", (req, res) => {
     data = JSON.parse(file);
   }
 
+  const alreadyExists = data.find(
+    (u) => u.email.toLowerCase() === user.email.toLowerCase()
+  );
+
+  if (alreadyExists) {
+    return res.status(409).send(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>User Added</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .message-box {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+          }
+          h2 {
+            color: #28a745;
+            margin-bottom: 20px;
+          }
+          a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+          }
+          a:hover {
+            background: #0056b3;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="message-box">
+          <h2>⚠️ User with this email already exists.</h2>
+          <a href="/">🏠 Back to Home</a>
+          <a href="/users">📋 View Users</a>
+        </div>
+      </body>
+    </html>
+  `);
+  }
+
   data.push(user);
   fs.writeFileSync("users.json", JSON.stringify(data, null, 2));
 
-  res.send("User added.");
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>User Added</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .message-box {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+          }
+          h2 {
+            color: #28a745;
+            margin-bottom: 20px;
+          }
+          a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+          }
+          a:hover {
+            background: #0056b3;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="message-box">
+          <h2>✅ User added successfully!</h2>
+          <a href="/">🏠 Back to Home</a>
+          <a href="/users">📋 View Users</a>
+        </div>
+      </body>
+    </html>
+  `);
 });
 
 app.use((req, res) => {

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New User</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #007bff;
+        margin-bottom: 25px;
+        text-align: center;
+        font-size: 26px;
+      }
+
+      label {
+        display: block;
+        margin-top: 18px;
+        font-weight: 600;
+        font-size: 15px;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 15px;
+      }
+
+      .gender-options {
+        display: flex;
+        gap: 20px;
+        margin-top: 8px;
+      }
+
+      .gender-options label {
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .gender-options input {
+        margin-right: 6px;
+      }
+
+      button {
+        margin-top: 25px;
+        padding: 12px;
+        background: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      a {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        label {
+          font-size: 14px;
+        }
+
+        input,
+        button {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add New User</h1>
+      <form action="/users" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required />
+
+        <label for="age">Age:</label>
+        <input type="number" name="age" required />
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required />
+
+        <label>Gender:</label>
+        <div class="gender-options">
+          <label><input type="radio" name="gender" value="male" required /> Male</label>
+          <label><input type="radio" name="gender" value="female" required /> Female</label>
+        </div>
+
+        <label for="city">City:</label>
+        <input type="text" name="city" required />
+
+        <button type="submit">Add User</button>
+      </form>
+
+      <a href="/">← Back to Home</a>
+    </div>
+  </body>
+</html>
