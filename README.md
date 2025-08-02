@@ -89,4 +89,4 @@ Form at `/add-user` includes:
 ---
 
 ## 🤝 Acknowledgments
-- This project was created as part of learning during my studies at Jamia Baitussalam.
+- This project was created as part of learning during my studies at Baitussalam Techpark.
